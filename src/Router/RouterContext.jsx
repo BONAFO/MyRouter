@@ -1,20 +1,24 @@
-// import { useEffect, useState } from "react";
-// import { config } from "./Routes";
 
 import Routes from "./Routes"
 
 
-const getType =(type)=>{
-    if(type != undefined){
+const getType = (type) => {
+    if (type != undefined) {
         type = ((type.replace('<', "")).replace('>', "")).toLowerCase();
         switch (type) {
             case 'str':
-        
                 return "string";
-           
+
+            case 'int':
+                return "int";
+
+
+            case "bt":
+            case "bigint":
+                return "bigint";
             default:
                 break;
-           } 
+        }
     }
 }
 const depurate_path = (path) => {
@@ -30,8 +34,8 @@ const depurate_path = (path) => {
                     original: query,
                     name: query.replace("&", "").split("<")[0],
                     type: getType((query.replace("&", "").split("<")[1])
-                    ? "<" + query.replace("&", "").split("<")[1]
-                    : undefined)
+                        ? "<" + query.replace("&", "").split("<")[1]
+                        : undefined)
                 };
                 return query_obj
             })
@@ -52,8 +56,8 @@ const depurate_path = (path) => {
                             original: param,
                             name: param.replace(":", "").split("<")[0],
                             type: getType((param.replace(":", "").split("<")[1])
-                            ? "<" + param.replace(":", "").split("<")[1]
-                            : undefined)
+                                ? "<" + param.replace(":", "").split("<")[1]
+                                : undefined)
                         };
                         return param_obj
                     }
@@ -91,6 +95,7 @@ const { createContext, useContext, useState, useEffect } = require("react");
 
 
 
+
 export const RouterContext = createContext();
 
 export const useRouter = () => useContext(RouterContext);
@@ -100,13 +105,16 @@ const RouterProvider = ({ children }) => {
     const [History, useHistory] = useState([]);
 
 
+
+    
+
     useEffect(() => {
 
         /* eslint-disable */
         const h = [];
-        Routes.map(r => h.push({ path: depurate_path(r.path), compo : r.e }))
+        Routes.map(r => h.push({ path: depurate_path(r.path), compo: r.e }))
 
-        
+
         useHistory(h);
         /* eslint-enable */
 

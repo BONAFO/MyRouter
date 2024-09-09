@@ -8,41 +8,19 @@
 </head>
 
 <body>
-    <h1 id="status">404 - Page Not Found</h1>
-    <!-- <h1 id="status">404 - Page Not Found</h1>
+    <h1 id="status">Loading...</h1>
 
-    <script>
-      if(sessionStorage.getItem("s")){
-            document.getElementById('status').textContent = '404 Page Loaded via React';
-            sessionStorage.removeItem("s")
-      }else{
-         document.getElementById('status').textContent = '404 Page Loaded Directly';
-
-      }
-        // function getQueryParam(name) {
-        //     const urlParams = new URLSearchParams(window.location.search);
-        //     return urlParams.get(name);
-        // }
-        // const source = getQueryParam('source');
-        // if (source === 'react') {
-        //     document.getElementById('status').textContent = '404 Page Loaded via React';
-        //   } else {
-        //     console.log(window.location);
-            
-        //     // document.getElementById('status').textContent = '404 Page Loaded Directly';
-        //   }
-    </script> -->
 
     <script>
         const RepoName = "/RouterTest/";
-        const urlParams = new URLSearchParams(window.location.search);
-        const source = urlParams.get('s');
-        if (source == '0') {
-            document.getElementById('status').textContent = '404 Page Loaded via React';
-        } else {
-            window.location.href = window.location.origin + RepoName+ "#/" + window.location.pathname.replace(RepoName , "");
-            document.getElementById('status').textContent = '404 Page Loaded Directly';
-        }
+
+        setTimeout(() => {
+            document.getElementById("status")=   "404 - Page Not Found"
+        }, 3000);
+        window.location.href = window.location.origin + RepoName+ "#/" + window.location.pathname.replace(RepoName , "");
+
+        
+
     </script>
 </body>
 
